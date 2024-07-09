@@ -1,7 +1,6 @@
 let yoff = 0.0;
-let colors = ['#FF6F61', '#DE3163', '#9B2335', '#5F021F', '#3B0B0B']; // Example colors
+let colors = ['#FF6F61', '#DE3163', '#9B2335', '#5F021F', '#3B0B0B', '#FF1493', '#00CED1']; // Example colors
 let numLayers = colors.length;
-let waveHeight = 100;
 
 function setup() {
     let canvas = createCanvas(windowWidth, windowHeight);
@@ -23,9 +22,9 @@ function drawWaveLayer(layerIndex) {
     beginShape();
     let xoff = 0;
     for (let x = 0; x <= width; x += 10) {
-        let y = map(noise(xoff, yoff + layerIndex), 0, 1, height - (layerIndex + 1) * waveHeight, height - layerIndex * waveHeight);
+        let y = map(noise(xoff, yoff + layerIndex * 0.1), 0, 1, height - (layerIndex + 1) * 50, height - layerIndex * 50 + 50);
         vertex(x, y);
-        xoff += 0.05 + layerIndex * 0.02; // Different motion for each layer
+        xoff += 0.05; // Different motion for each layer
     }
     vertex(width, height);
     vertex(0, height);
