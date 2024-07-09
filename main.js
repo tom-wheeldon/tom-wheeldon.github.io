@@ -1,28 +1,31 @@
-import * as THREE from 'three';
+let cols, rows;
+let scl = 20;
+let zoff = 0;
 
-let scene, camera, renderer, mesh;
-
-function init() {
-    scene = new THREE.Scene();
-    camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    renderer = new THREE.WebGLRenderer();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    document.body.appendChild(renderer.domElement);
-
-    const geometry = new THREE.SphereGeometry(5, 32, 32);
-    const material = new THREE.MeshBasicMaterial({ color: 0x0077ff, wireframe: true });
-    mesh = new THREE.Mesh(geometry, material);
-    scene.add(mesh);
-
-    camera.position.z = 20;
+function setup() {
+    let canvas = createCanvas(windowWidth, windowHeight);
+    canvas.parent('animation-container');
+    cols = floor(width / scl);
+    rows = floor(height / scl);
 }
 
-function animate() {
-    requestAnimationFrame(animate);
-    mesh.rotation.x += 0.01;
-    mesh.rotation.y += 0.01;
-    renderer.render(scene, camera);
+function draw() {
+    background(0);
+    let yoff = 0;
+    for (let y = 0; y < rows; y++) {
+        let xoff = 0;
+        for (let x = 0; x < cols; x++) {
+            let angle = noise(xoff, yoff, zoff) * TWO_PI * 4;
+            let v = p5.Vector.fromAngle(angle);
+            xoff += 0.1;
+            stroke(255, 50);
+            push();
+            translate(x * scl, y * scl);
+            rotate(v.heading());
+            line(0, 0, scl, 0);
+            pop();
+        }
+        yoff += 0.1;
+    }
+    zoff += 0.01;
 }
-
-init();
-animate();
