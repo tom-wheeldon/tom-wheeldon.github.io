@@ -1,7 +1,6 @@
 let yoff = 0.0;
 let colors = ['#FF6F61', '#DE3163', '#9B2335', '#5F021F', '#3B0B0B', '#FF1493', '#00CED1']; // Example colors
-let numLayers = colors.length;
-let baseHeight = 100; // Base height for the largest wave
+let numLayers = 3; // Set the number of waves
 
 function setup() {
     let canvas = createCanvas(windowWidth, windowHeight);
@@ -18,13 +17,13 @@ function draw() {
 }
 
 function drawWaveLayer(layerIndex) {
-    fill(colors[layerIndex]);
+    fill(colors[layerIndex % colors.length]); // Ensure there's enough colors for all layers
     noStroke();
     beginShape();
     let xoff = 0;
-    let waveHeight = baseHeight - layerIndex * 10; // Decrease height for each layer
+    let waveHeight = 50 - layerIndex * 5; // Decrease height for each layer
     for (let x = 0; x <= width; x += 10) {
-        let y = map(noise(xoff, yoff + layerIndex), 0, 1, height - (layerIndex + 1) * waveHeight, height - layerIndex * waveHeight + waveHeight / 2);
+        let y = map(noise(xoff, yoff + layerIndex), 0, 1, height - (numLayers - layerIndex) * waveHeight, height - (numLayers - layerIndex - 1) * waveHeight);
         vertex(x, y);
         xoff += 0.05 + layerIndex * 0.02; // Different motion for each layer
     }
