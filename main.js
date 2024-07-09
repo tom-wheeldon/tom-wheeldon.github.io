@@ -1,28 +1,23 @@
-import * as THREE from 'three';
+let yoff = 0.0;
 
-let scene, camera, renderer, mesh;
-
-function init() {
-    scene = new THREE.Scene();
-    camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    renderer = new THREE.WebGLRenderer();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    document.body.appendChild(renderer.domElement);
-
-    const geometry = new THREE.SphereGeometry(5, 32, 32);
-    const material = new THREE.MeshBasicMaterial({ color: 0x0077ff, wireframe: true });
-    mesh = new THREE.Mesh(geometry, material);
-    scene.add(mesh);
-
-    camera.position.z = 20;
+function setup() {
+    let canvas = createCanvas(windowWidth, windowHeight);
+    canvas.parent('animation-container');
 }
 
-function animate() {
-    requestAnimationFrame(animate);
-    mesh.rotation.x += 0.01;
-    mesh.rotation.y += 0.01;
-    renderer.render(scene, camera);
+function draw() {
+    background(0);
+    fill(0, 150, 255);
+    noStroke();
+    beginShape();
+    let xoff = 0;
+    for (let x = 0; x <= width; x += 10) {
+        let y = map(noise(xoff, yoff), 0, 1, 200, 400);
+        vertex(x, y);
+        xoff += 0.05;
+    }
+    yoff += 0.01;
+    vertex(width, height);
+    vertex(0, height);
+    endShape(CLOSE);
 }
-
-init();
-animate();
