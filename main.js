@@ -1,6 +1,6 @@
 let yoff = 0.0;
 let colors = ['#FF6F61', '#DE3163', '#9B2335', '#5F021F', '#3B0B0B']; // Example colors
-let numLayers = 5; // Set the number of waves
+let numLayers = 3; // Set the number of waves
 
 function setup() {
     let canvas = createCanvas(windowWidth, windowHeight);
