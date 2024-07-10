@@ -1,14 +1,26 @@
+html,
 body {
-    background-color: #000;
-    color: #fff;
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    background: #123;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-family: Arial, sans-serif;
+    color: #fff;
+}
+
+body {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
-    margin: 0;
     text-align: center;
+}
+
+.content {
+    z-index: 1;
 }
 
 a {
@@ -18,6 +30,94 @@ a {
 }
 
 #animation-container {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: 60%;
+    height: 100%;
+    z-index: -1;
+}
+
+head::before,
+head::after,
+body::before,
+body::after {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 3em;
+    height: 3em;
+    content: '.';
+    mix-blend-mode: screen;
+    animation: move infinite ease-in-out alternate;
+}
+
+body::before {
+    text-shadow: -0.5em 0.5em 7px hsla(0, 100%, 50%, 0.9),
+        0.5em -0.5em 7px hsla(36, 100%, 50%, 0.9),
+        -0.5em -0.5em 7px hsla(72, 100%, 50%, 0.9),
+        0.5em 0.5em 7px hsla(108, 100%, 50%, 0.9),
+        -0.5em 0.5em 7px hsla(144, 100%, 50%, 0.9),
+        0.5em -0.5em 7px hsla(180, 100%, 50%, 0.9),
+        -0.5em -0.5em 7px hsla(216, 100%, 50%, 0.9),
+        0.5em 0.5em 7px hsla(252, 100%, 50%, 0.9),
+        -0.5em 0.5em 7px hsla(288, 100%, 50%, 0.9),
+        0.5em -0.5em 7px hsla(324, 100%, 50%, 0.9);
+    animation-duration: 44s;
+    animation-delay: -27s;
+}
+
+body::after {
+    text-shadow: -0.5em 0.5em 7px hsla(0, 100%, 50%, 0.9),
+        0.5em -0.5em 7px hsla(36, 100%, 50%, 0.9),
+        -0.5em -0.5em 7px hsla(72, 100%, 50%, 0.9),
+        0.5em 0.5em 7px hsla(108, 100%, 50%, 0.9),
+        -0.5em 0.5em 7px hsla(144, 100%, 50%, 0.9),
+        0.5em -0.5em 7px hsla(180, 100%, 50%, 0.9),
+        -0.5em -0.5em 7px hsla(216, 100%, 50%, 0.9),
+        0.5em 0.5em 7px hsla(252, 100%, 50%, 0.9),
+        -0.5em 0.5em 7px hsla(288, 100%, 50%, 0.9),
+        0.5em -0.5em 7px hsla(324, 100%, 50%, 0.9);
+    animation-duration: 43s;
+    animation-delay: -32s;
+}
+
+head::before {
+    text-shadow: -0.5em 0.5em 7px hsla(0, 100%, 50%, 0.9),
+        0.5em -0.5em 7px hsla(36, 100%, 50%, 0.9),
+        -0.5em -0.5em 7px hsla(72, 100%, 50%, 0.9),
+        0.5em 0.5em 7px hsla(108, 100%, 50%, 0.9),
+        -0.5em 0.5em 7px hsla(144, 100%, 50%, 0.9),
+        0.5em -0.5em 7px hsla(180, 100%, 50%, 0.9),
+        -0.5em -0.5em 7px hsla(216, 100%, 50%, 0.9),
+        0.5em 0.5em 7px hsla(252, 100%, 50%, 0.9),
+        -0.5em 0.5em 7px hsla(288, 100%, 50%, 0.9),
+        0.5em -0.5em 7px hsla(324, 100%, 50%, 0.9);
+    animation-duration: 42s;
+    animation-delay: -23s;
+}
+
+head::after {
+    text-shadow: -0.5em 0.5em 7px hsla(0, 100%, 50%, 0.9),
+        0.5em -0.5em 7px hsla(36, 100%, 50%, 0.9),
+        -0.5em -0.5em 7px hsla(72, 100%, 50%, 0.9),
+        0.5em 0.5em 7px hsla(108, 100%, 50%, 0.9),
+        -0.5em 0.5em 7px hsla(144, 100%, 50%, 0.9),
+        0.5em -0.5em 7px hsla(180, 100%, 50%, 0.9),
+        -0.5em -0.5em 7px hsla(216, 100%, 50%, 0.9),
+        0.5em 0.5em 7px hsla(252, 100%, 50%, 0.9),
+        -0.5em 0.5em 7px hsla(288, 100%, 50%, 0.9),
+        0.5em -0.5em 7px hsla(324, 100%, 50%, 0.9);
+    animation-duration: 41s;
+    animation-delay: -19s;
+}
+
+@keyframes move {
+    from {
+        transform: rotate(0deg) scale(12) translateX(-20px);
+    }
+
+    to {
+        transform: rotate(360deg) scale(18) translateX(20px);
+    }
 }
