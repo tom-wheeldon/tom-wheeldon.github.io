@@ -55,15 +55,8 @@ const renderer = new THREE.WebGLRenderer({ alpha: true });
 renderer.setSize(width, height);
 container.appendChild(renderer.domElement);
 
-// Create a torus knot with custom parameters
-const radius = 4; // Overall size of the torus knot
-const tube = 1.5; // Thickness of the tube
-const tubularSegments = 100; // Number of segments along the tubular direction
-const radialSegments = 16; // Number of segments along the radial direction
-const p = 2; // Number of times the geometry winds around its axis of rotational symmetry
-const q = 3; // Number of times the geometry winds around a circle in the interior of the torus knot
-
-const geometry = new THREE.TorusKnotGeometry(radius, tube, tubularSegments, radialSegments, p, q);
+// Create a torus knot
+const geometry = new THREE.TorusKnotGeometry(5, 3, 100, 16); // Radius, tube diameter, tubular segments, radial segments
 const material = new THREE.MeshBasicMaterial({ color: 0x84e899, wireframe: true }); // Green color matching your text color
 const torusKnot = new THREE.Mesh(geometry, material);
 scene.add(torusKnot);
