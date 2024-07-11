@@ -56,8 +56,8 @@ renderer.setSize(width, height);
 container.appendChild(renderer.domElement);
 
 // Create a torus knot
-const geometry = new THREE.TorusKnotGeometry(4, 1.5, 100, 16); // Radius, tube diameter, tubular segments, radial segments
-const material = new THREE.MeshBasicMaterial({ color: 0xfffff0, wireframe: true }); // Green color matching your text color
+const geometry = new THREE.TorusKnotGeometry(4, 1, 100, 16, 3, 5); // Radius, tube diameter, tubular segments, radial segments
+const material = new THREE.MeshBasicMaterial({ color: 0x84e899, wireframe: true }); // Green color matching your text color
 const torusKnot = new THREE.Mesh(geometry, material);
 scene.add(torusKnot);
 
