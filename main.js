@@ -1,26 +1,38 @@
-let scene, camera, renderer, mesh;
+// main.js
+import * as THREE from 'three';
 
-function init() {
-    scene = new THREE.Scene();
-    camera = new THREE.PerspectiveCamera(75, window.innerWidth / 300, 0.1, 1000); // Adjust camera aspect ratio
-    renderer = new THREE.WebGLRenderer({ alpha: true }); // Ensure background is transparent
-    renderer.setSize(window.innerWidth, 300); // Constrain renderer size
-    document.getElementById('animation-container').appendChild(renderer.domElement);
+// Scene setup
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
+const renderer = new THREE.WebGLRenderer();
+const container = document.getElementById('animation-container');
+renderer.setSize(container.clientWidth, container.clientHeight);
+container.appendChild(renderer.domElement);
 
-    const geometry = new THREE.SphereGeometry(5, 32, 32);
-    const material = new THREE.MeshBasicMaterial({ color: 0x0077ff, wireframe: true });
-    mesh = new THREE.Mesh(geometry, material);
-    scene.add(mesh);
+// Create a sphere
+const geometry = new THREE.SphereGeometry(5, 32, 32);
+const material = new THREE.MeshBasicMaterial({ color: 0x84e899, wireframe: true });
+const sphere = new THREE.Mesh(geometry, material);
+scene.add(sphere);
 
-    camera.position.z = 20;
-}
+// Position the camera
+camera.position.z = 10;
 
+// Animation loop
 function animate() {
     requestAnimationFrame(animate);
-    mesh.rotation.x += 0.01;
-    mesh.rotation.y += 0.01;
+
+    // Rotate the sphere
+    sphere.rotation.x += 0.01;
+    sphere.rotation.y += 0.01;
+
     renderer.render(scene, camera);
 }
-
-init();
 animate();
+
+// Handle window resize
+window.addEventListener('resize', () => {
+    renderer.setSize(container.clientWidth, container.clientHeight);
+    camera.aspect = container.clientWidth / container.clientHeight;
+    camera.updateProjectionMatrix();
+});
