@@ -2,9 +2,9 @@ let scene, camera, renderer, mesh;
 
 function init() {
     scene = new THREE.Scene();
-    camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    renderer = new THREE.WebGLRenderer();
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    camera = new THREE.PerspectiveCamera(75, window.innerWidth / 300, 0.1, 1000); // Adjust camera aspect ratio
+    renderer = new THREE.WebGLRenderer({ alpha: true }); // Ensure background is transparent
+    renderer.setSize(window.innerWidth, 300); // Constrain renderer size
     document.getElementById('animation-container').appendChild(renderer.domElement);
 
     const geometry = new THREE.SphereGeometry(5, 32, 32);
