@@ -8,13 +8,13 @@ const width = container.clientWidth;
 const height = container.clientHeight;
 
 const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
-const renderer = new THREE.WebGLRenderer();
+const renderer = new THREE.WebGLRenderer({ alpha: true });
 renderer.setSize(width, height);
 container.appendChild(renderer.domElement);
 
 // Create a sphere
 const geometry = new THREE.SphereGeometry(5, 32, 32);
-const material = new THREE.MeshBasicMaterial({ color: 0x84e899, wireframe: true });
+const material = new THREE.MeshBasicMaterial({ color: 0x84e899, wireframe: true }); // Green color matching your text color
 const sphere = new THREE.Mesh(geometry, material);
 scene.add(sphere);
 
