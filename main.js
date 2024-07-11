@@ -42,7 +42,8 @@
 //     camera.updateProjectionMatrix();
 // });
 
-//torus knot
+// main.js
+
 // Scene setup
 const scene = new THREE.Scene();
 const container = document.getElementById('animation-container');
@@ -55,7 +56,14 @@ renderer.setSize(width, height);
 container.appendChild(renderer.domElement);
 
 // Create a torus knot
-const geometry = new THREE.TorusKnotGeometry(3, 2.5, 75, 16); // Radius, tube diameter, tubular segments, radial segments
+const radius = 4; // Overall size of the torus knot
+const tube = 1.5; // Thickness of the tube
+const tubularSegments = 100; // Number of segments along the tubular direction
+const radialSegments = 16; // Number of segments along the radial direction
+const p = 2; // Number of times the geometry winds around its axis of rotational symmetry
+const q = 3; // Number of times the geometry winds around a circle in the interior of the torus knot
+
+const geometry = new THREE.TorusKnotGeometry(radius, tube, tubularSegments, radialSegments, p, q);
 const material = new THREE.MeshBasicMaterial({ color: 0x84e899, wireframe: true }); // Green color matching your text color
 const torusKnot = new THREE.Mesh(geometry, material);
 scene.add(torusKnot);
@@ -63,20 +71,14 @@ scene.add(torusKnot);
 // Position the camera
 camera.position.z = 20; // Adjust the camera distance to ensure the entire shape is visible
 
+// Animation loop variables
+let clock = new THREE.Clock();
+let speed = 2; // Speed of movement
+let pathRadius = 10; // Radius of the circular path
+
 // Animation loop
 function animate() {
     requestAnimationFrame(animate);
-
-    // Rotate the torus knot
-    torusKnot.rotation.x += 0.01;
-    torusKnot.rotation.y += 0.01;
-
-    renderer.render(scene, camera);
-}
-//animate();
-
-function snake() {
-    requestAnimationFrame(snake);
 
     // Calculate the elapsed time
     let elapsedTime = clock.getElapsedTime();
@@ -86,11 +88,11 @@ function snake() {
     torusKnot.position.y = pathRadius * Math.sin(speed * elapsedTime);
 
     // Optional: Rotate the torus knot around its own axis for additional effect
-    //torusKnot.rotation.z += 0.01;
+    torusKnot.rotation.z += 0.001;
 
     renderer.render(scene, camera);
 }
-snake();
+animate();
 
 // Handle window resize
 window.addEventListener('resize', () => {
