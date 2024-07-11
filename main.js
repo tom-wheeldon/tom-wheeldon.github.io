@@ -1,5 +1,4 @@
 // main.js
-import * as THREE from 'three';
 
 // Scene setup
 const scene = new THREE.Scene();
@@ -41,3 +40,4 @@ window.addEventListener('resize', () => {
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
 });
+f
