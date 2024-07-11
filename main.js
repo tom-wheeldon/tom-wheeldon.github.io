@@ -55,8 +55,8 @@ renderer.setSize(width, height);
 container.appendChild(renderer.domElement);
 
 // Create a torus knot
-const geometry = new THREE.TorusKnotGeometry(4, 1.5, 100, 16); // Radius, tube diameter, tubular segments, radial segments
-const material = new THREE.MeshBasicMaterial({ color: 0x84e899, wireframe: true }); // Green color matching your text color
+const geometry = new THREE.TorusKnotGeometry(3, 2.5, 75, 16); // Radius, tube diameter, tubular segments, radial segments
+const material = new THREE.MeshBasicMaterial({ color: 0x84e899, wireframe: false }); // Green color matching your text color
 const torusKnot = new THREE.Mesh(geometry, material);
 scene.add(torusKnot);
 
@@ -64,16 +64,35 @@ scene.add(torusKnot);
 camera.position.z = 20; // Adjust the camera distance to ensure the entire shape is visible
 
 // Animation loop
-function animate() {
-    requestAnimationFrame(animate);
+function rotate() {
+    requestAnimationFrame(rotate);
 
     // Rotate the torus knot
     torusKnot.rotation.x += 0.01;
     torusKnot.rotation.y += 0.01;
 
+    torusKnot.
+
     renderer.render(scene, camera);
 }
-animate();
+rotate();
+
+function snake() {
+    requestAnimationFrame(snake);
+
+    // Calculate the elapsed time
+    let elapsedTime = clock.getElapsedTime();
+
+    // Move the torus knot along a circular path
+    torusKnot.position.x = pathRadius * Math.cos(speed * elapsedTime);
+    torusKnot.position.y = pathRadius * Math.sin(speed * elapsedTime);
+
+    // Optional: Rotate the torus knot around its own axis for additional effect
+    torusKnot.rotation.z += 0.01;
+
+    renderer.render(scene, camera);
+}
+snake();
 
 // Handle window resize
 window.addEventListener('resize', () => {
