@@ -5,8 +5,7 @@ html {
 }
 
 body {
-    background-color: #000;
-    /* This ensures the background is consistent */
+    background: #000;
     color: #fff;
     font-family: Arial, sans-serif;
     display: flex;
@@ -17,7 +16,6 @@ body {
     margin: 0;
     text-align: center;
     position: relative;
-    /* Ensure absolute positioning within body */
 }
 
 a {
@@ -29,7 +27,6 @@ a {
 #animation-container {
     width: 100%;
     height: 60%;
-    /* Ensure the sphere is fully visible */
     position: absolute;
     bottom: 0;
 }
