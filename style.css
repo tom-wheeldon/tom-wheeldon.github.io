@@ -172,8 +172,8 @@ body {
     /* Adjust the width as needed */
     height: 300px;
     /* Adjust the height as needed */
-    margin: 0 auto;
-    margin-bottom: 20px;
+    margin: 20px auto;
+    /* Ensure proper spacing around the container */
     background-color: #121826;
 }
 
