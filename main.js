@@ -64,32 +64,41 @@ const p = 2; // Number of times the geometry winds around its axis of rotational
 const q = 3; // Number of times the geometry winds around a circle in the interior of the torus knot
 
 const geometry = new THREE.TorusKnotGeometry(radius, tube, tubularSegments, radialSegments, p, q);
-const material = new THREE.MeshBasicMaterial({ color: 0x84e899, wireframe: true }); // Green color matching your text color
+
+// Custom shader material for animation
+const material = new THREE.ShaderMaterial({
+    uniforms: {
+        time: { value: 1.0 },
+    },
+    vertexShader: `
+        uniform float time;
+        void main() {
+            vec3 transformed = position;
+            transformed.y += sin(transformed.x * 10.0 + time) * 0.1;
+            transformed.z += cos(transformed.y * 10.0 + time) * 0.1;
+            gl_Position = projectionMatrix * modelViewMatrix * vec4(transformed, 1.0);
+        }
+    `,
+    fragmentShader: `
+        void main() {
+            gl_FragColor = vec4(0.52, 0.91, 0.60, 1.0); // Color matching your design (0x84e899)
+        }
+    `,
+    wireframe: true
+});
+
 const torusKnot = new THREE.Mesh(geometry, material);
 scene.add(torusKnot);
 
 // Position the camera
 camera.position.z = 20; // Adjust the camera distance to ensure the entire shape is visible
 
-// Animation loop variables
-let clock = new THREE.Clock();
-let speed = 2; // Speed of movement
-
 // Animation loop
 function animate() {
     requestAnimationFrame(animate);
 
-    // Calculate the elapsed time
-    let elapsedTime = clock.getElapsedTime();
-
-    // Move the vertices of the torus knot to create a moving effect
-    geometry.vertices.forEach((vertex, index) => {
-        let angle = (index / geometry.vertices.length) * Math.PI * 2;
-        vertex.x += Math.cos(angle + elapsedTime * speed) * 0.01;
-        vertex.y += Math.sin(angle + elapsedTime * speed) * 0.01;
-    });
-
-    geometry.verticesNeedUpdate = true;
+    // Update the shader uniform for time
+    material.uniforms.time.value += 0.05;
 
     renderer.render(scene, camera);
 }
