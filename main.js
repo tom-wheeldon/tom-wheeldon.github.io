@@ -55,7 +55,7 @@ const renderer = new THREE.WebGLRenderer({ alpha: true });
 renderer.setSize(width, height);
 container.appendChild(renderer.domElement);
 
-// Create a torus knot
+// Create a torus knot with custom parameters
 const radius = 4; // Overall size of the torus knot
 const tube = 1.5; // Thickness of the tube
 const tubularSegments = 100; // Number of segments along the tubular direction
@@ -64,29 +64,7 @@ const p = 2; // Number of times the geometry winds around its axis of rotational
 const q = 3; // Number of times the geometry winds around a circle in the interior of the torus knot
 
 const geometry = new THREE.TorusKnotGeometry(radius, tube, tubularSegments, radialSegments, p, q);
-
-// Custom shader material for animation
-const material = new THREE.ShaderMaterial({
-    uniforms: {
-        time: { value: 1.0 },
-    },
-    vertexShader: `
-        uniform float time;
-        void main() {
-            vec3 transformed = position;
-            transformed.y += sin(transformed.x * 10.0 + time) * 0.1;
-            transformed.z += cos(transformed.y * 10.0 + time) * 0.1;
-            gl_Position = projectionMatrix * modelViewMatrix * vec4(transformed, 1.0);
-        }
-    `,
-    fragmentShader: `
-        void main() {
-            gl_FragColor = vec4(0.52, 0.91, 0.60, 1.0); // Color matching your design (0x84e899)
-        }
-    `,
-    wireframe: true
-});
-
+const material = new THREE.MeshBasicMaterial({ color: 0x84e899, wireframe: true }); // Green color matching your text color
 const torusKnot = new THREE.Mesh(geometry, material);
 scene.add(torusKnot);
 
@@ -97,8 +75,9 @@ camera.position.z = 20; // Adjust the camera distance to ensure the entire shape
 function animate() {
     requestAnimationFrame(animate);
 
-    // Update the shader uniform for time
-    material.uniforms.time.value += 0.05;
+    // Rotate the torus knot
+    torusKnot.rotation.x += 0.01;
+    torusKnot.rotation.y += 0.01;
 
     renderer.render(scene, camera);
 }
@@ -112,3 +91,4 @@ window.addEventListener('resize', () => {
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
 });
+
