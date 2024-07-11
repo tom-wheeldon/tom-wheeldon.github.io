@@ -33,7 +33,7 @@ head::after {
     left: 50%;
     width: 3em;
     height: 3em;
-    /* content: "."; */
+    content: ".";
     mix-blend-mode: screen;
     animation: 44s -27s move infinite ease-in-out alternate;
 }
