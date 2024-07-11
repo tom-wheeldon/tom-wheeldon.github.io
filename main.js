@@ -75,7 +75,7 @@ function rotate() {
 
     renderer.render(scene, camera);
 }
-rotate();
+//rotate();
 
 function snake() {
     requestAnimationFrame(snake);
