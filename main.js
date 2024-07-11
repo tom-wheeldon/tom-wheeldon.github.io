@@ -13,25 +13,14 @@ function init() {
     scene.add(mesh);
 
     camera.position.z = 20;
-
-    window.addEventListener('resize', onWindowResize, false);
-
-    animate();
-}
-
-function onWindowResize() {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
 }
 
 function animate() {
     requestAnimationFrame(animate);
-
     mesh.rotation.x += 0.01;
     mesh.rotation.y += 0.01;
-
     renderer.render(scene, camera);
 }
 
 init();
+animate();
