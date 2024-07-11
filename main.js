@@ -74,7 +74,6 @@ camera.position.z = 20; // Adjust the camera distance to ensure the entire shape
 // Animation loop variables
 let clock = new THREE.Clock();
 let speed = 2; // Speed of movement
-let pathRadius = 10; // Radius of the circular path
 
 // Animation loop
 function animate() {
@@ -83,12 +82,14 @@ function animate() {
     // Calculate the elapsed time
     let elapsedTime = clock.getElapsedTime();
 
-    // Move the torus knot along a circular path
-    torusKnot.position.x = pathRadius * Math.cos(speed * elapsedTime);
-    torusKnot.position.y = pathRadius * Math.sin(speed * elapsedTime);
+    // Move the vertices of the torus knot to create a moving effect
+    geometry.vertices.forEach((vertex, index) => {
+        let angle = (index / geometry.vertices.length) * Math.PI * 2;
+        vertex.x += Math.cos(angle + elapsedTime * speed) * 0.01;
+        vertex.y += Math.sin(angle + elapsedTime * speed) * 0.01;
+    });
 
-    // Optional: Rotate the torus knot around its own axis for additional effect
-    torusKnot.rotation.z += 0.001;
+    geometry.verticesNeedUpdate = true;
 
     renderer.render(scene, camera);
 }
