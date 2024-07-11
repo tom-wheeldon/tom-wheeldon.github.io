@@ -1,37 +1,26 @@
-let particles = [];
+let scene, camera, renderer, mesh;
 
-function setup() {
-    let canvas = createCanvas(windowWidth, windowHeight);
-    canvas.parent('animation-container');
-    for (let i = 0; i < 100; i++) {
-        particles.push(new Particle(random(width), random(height)));
-    }
+function init() {
+    scene = new THREE.Scene();
+    camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    renderer = new THREE.WebGLRenderer();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.getElementById('animation-container').appendChild(renderer.domElement);
+
+    const geometry = new THREE.SphereGeometry(5, 32, 32);
+    const material = new THREE.MeshBasicMaterial({ color: 0x0077ff, wireframe: true });
+    mesh = new THREE.Mesh(geometry, material);
+    scene.add(mesh);
+
+    camera.position.z = 20;
 }
 
-function draw() {
-    background(0);
-    for (let particle of particles) {
-        particle.update();
-        particle.show();
-    }
+function animate() {
+    requestAnimationFrame(animate);
+    mesh.rotation.x += 0.01;
+    mesh.rotation.y += 0.01;
+    renderer.render(scene, camera);
 }
 
-class Particle {
-    constructor(x, y) {
-        this.x = x;
-        this.y = y;
-        this.vx = random(-1, 1);
-        this.vy = random(-1, 1);
-    }
-
-    update() {
-        this.x += this.vx;
-        this.y += this.vy;
-    }
-
-    show() {
-        stroke(255);
-        strokeWeight(2);
-        point(this.x, this.y);
-    }
-}
+init();
+animate();
