@@ -12,7 +12,7 @@ renderer.setSize(width, height);
 container.appendChild(renderer.domElement);
 
 // Create a sphere with hardcoded size
-const geometry = new THREE.SphereGeometry(10, 16, 16); // Adjust the radius here to change the sphere size
+const geometry = new THREE.SphereGeometry(10, 32, 32); // Adjust the radius here to change the sphere size
 const material = new THREE.MeshBasicMaterial({ color: 0x84e899, wireframe: true }); // Green color matching your text color
 const sphere = new THREE.Mesh(geometry, material);
 scene.add(sphere);
