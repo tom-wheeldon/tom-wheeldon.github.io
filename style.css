@@ -127,7 +127,7 @@
 body {
     background-color: #121826;
     color: #84e899;
-    font-family: 'Lato', Arial, sans-serif;
+    font-family: 'Lato';
     display: flex;
     justify-content: center;
     align-items: center;
@@ -168,9 +168,9 @@ body {
 }
 
 #animation-container {
-    width: 600px;
+    width: 300px;
     /* Adjust the width as needed */
-    height: 600px;
+    height: 300px;
     /* Adjust the height as needed */
     margin: 20px auto;
     /* Ensure proper spacing around the container */
@@ -185,8 +185,8 @@ h1 {
 
 h2 {
     margin-bottom: 10px;
-    font-weight: thin;
     font-family: 'Lato';
+    font-weight: thin;
 }
 
 .subtitle {

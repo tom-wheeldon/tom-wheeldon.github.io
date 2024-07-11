@@ -11,15 +11,14 @@ const renderer = new THREE.WebGLRenderer({ alpha: true });
 renderer.setSize(width, height);
 container.appendChild(renderer.domElement);
 
-// Create a sphere with adjustable size
-const radius = 1; // Adjust this value to change the sphere size
-const geometry = new THREE.SphereGeometry(32, 64, 64);
+// Create a sphere with hardcoded size
+const geometry = new THREE.SphereGeometry(4, 32, 32); // Adjust the radius here to change the sphere size
 const material = new THREE.MeshBasicMaterial({ color: 0x84e899, wireframe: true }); // Green color matching your text color
 const sphere = new THREE.Mesh(geometry, material);
 scene.add(sphere);
 
 // Position the camera
-camera.position.z = 15;
+camera.position.z = 20; // Adjust the camera distance to ensure the entire sphere is visible
 
 // Animation loop
 function animate() {
