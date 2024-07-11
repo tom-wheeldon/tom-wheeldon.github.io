@@ -60,7 +60,7 @@ const geometry = new THREE.TorusKnotGeometry(4, 1, 100, 16, 3, 5); // Radius, tu
 const material = new THREE.MeshBasicMaterial({ color: 0x84e899, wireframe: true }); // Green color matching your text color
 const torusKnot = new THREE.Mesh(geometry, material);
 scene.add(torusKnot);
-
+//
 // Position the camera
 camera.position.z = 20; // Adjust the camera distance to ensure the entire shape is visible
 
