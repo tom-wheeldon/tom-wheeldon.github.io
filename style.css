@@ -205,9 +205,9 @@ h1 {
 }
 
 #animation-container {
-    width: 300px;
+    width: 50;
     /* Adjust the width as needed */
-    height: 300px;
+    height: 100;
     /* Adjust the height as needed */
     margin: 0 auto;
     margin-bottom: 20px;
