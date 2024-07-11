@@ -12,10 +12,16 @@ renderer.setSize(width, height);
 container.appendChild(renderer.domElement);
 
 // Create a sphere with hardcoded size
-const geometry = new THREE.SphereGeometry(10, 32, 32); // Adjust the radius here to change the sphere size
-const material = new THREE.MeshBasicMaterial({ color: 0x84e899, wireframe: true }); // Green color matching your text color
-const sphere = new THREE.Mesh(geometry, material);
-scene.add(sphere);
+// const geometry = new THREE.SphereGeometry(10, 32, 32); // Adjust the radius here to change the sphere size
+// const material = new THREE.MeshBasicMaterial({ color: 0x84e899, wireframe: true }); // Green color matching your text color
+// const sphere = new THREE.Mesh(geometry, material);
+// scene.add(sphere);
+
+//torus knot
+const geometry = new THREE.TorusKnotGeometry(3, 1, 100, 16); // Radius, tube diameter, tubular segments, radial segments
+const material = new THREE.MeshBasicMaterial({ color: 0x84e899, wireframe: true });
+const torusKnot = new THREE.Mesh(geometry, material);
+scene.add(torusKnot);
 
 // Position the camera
 camera.position.z = 20; // Adjust the camera distance to ensure the entire sphere is visible
